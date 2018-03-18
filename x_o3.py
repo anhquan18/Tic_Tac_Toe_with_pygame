@@ -169,23 +169,23 @@ def G_Won(board, ani = False):
     won_type = [False, False, [False,False]]
     # VERTICAL WIN
     for x_cor in range(board_width):
-        if (board[x_cor][0] == board[x_cor][1]) and (board[x_cor][1] == board[x_cor][2]):
+        if (board[x_cor][0] == board[x_cor][1] == board[x_cor][2]):
             if board[x_cor][0] != False:
                 won_type = ['won','vertical',(x_cor, 0)]
     
     # SIDE WIN
     for y_cor in range(board_height):
-        if (board[0][y_cor] == board[1][y_cor]) and (board[1][y_cor] == board[2][y_cor]):
+        if (board[0][y_cor] == board[1][y_cor] == board[2][y_cor]):
             if board[0][y_cor] != False:
                 won_type = ['won','side',(0, y_cor)]
     
     # DIAGONAL WIN
     if board[1][1] != False:
         # LEFT
-        if (board[0][0] == board[1][1]) and (board[1][1] == board[2][2]):
+        if (board[0][0] == board[1][1] == board[2][2]):
             won_type = ['won','diagonal_lef',(1,1)]
         # RIGHT
-        if (board[2][0] == board[1][1]) and (board[1][1] == board[0][2]):
+        if (board[2][0] == board[1][1] == board[0][2]):
             won_type = ['won','diagonal_right',(1, 1)]
         
     
