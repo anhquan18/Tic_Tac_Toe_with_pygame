@@ -59,7 +59,7 @@ class G_node:
         self.Next_move()                          # go to the next step of the game
     
     def Next_move(self):
-        if (self.depth >= game_depth) or (G_Won(self.g_board) == 'won'):
+        if (self.depth >= game_depth) or (G_Won(self.g_board) == 'won') or (M_left(self.g_board) == []):
             return 0
         if G_Won(self.g_board) == False:
             empty_b = M_left(self.g_board)
@@ -72,7 +72,7 @@ class G_node:
     
     def State(self):
         if G_Won(self.g_board) == 'won':
-            if self.player == O:
+            if self.player == -AI:
                 print 'human won\n'
                 return (human_win, 'won') 
             else:
@@ -111,6 +111,10 @@ def Block(board, x_cor, y_cor):
     if (board[0][0] == board[1][1] == -AI) and (AI == board[2][2]) and (x_cor == 2 and y_cor == 2):
         return True
     if (board[2][2] == board[1][1] == -AI) and (AI == board[0][0]) and (x_cor == 0 and y_cor == 0):
+        return True
+    if (board[2][0] == board[1][1] == -AI) and (AI == board[0][2]) and (x_cor == 0 and y_cor == 2):
+        return True
+    if (board[0][2] == board[1][1] == -AI) and (AI == board[2][0]) and (x_cor == 2 and y_cor == 0):
         return True
     if ((board[0][0] == board[2][2] == -AI) and (AI == board[1][1])) or ((board[2][0] == board[0][2] == -AI) and (AI == board[1][1])):
         return True
@@ -266,8 +270,7 @@ if __name__ == '__main__':
     global game_surf
     game_fps = pygame.time.Clock()
     game_board = Create_board()
-    mousex = 0
-    mousey = 0
+    mousex = mousey = 0
     
     game_surf = pygame.display.set_mode((win_width, win_height))
     pygame.display.set_caption('TIC TAC TOE')
@@ -302,7 +305,7 @@ if __name__ == '__main__':
                         g_nod = G_node(AI, 0, game_board, [x, y])
                         game_board[x][y] = False
                         x_moves.append(g_nod) 
-                    best_val = (human_win, [])
+                    best_val = [human_win, []]
                     # Evaluate the game
                     for i in range(len(x_moves)):
                         game_node = x_moves[i]
@@ -312,8 +315,11 @@ if __name__ == '__main__':
                             best_val = normal_move
                     
                     best_move = best_val
+                    # Debug move
                     if best_move[1] == []:
-                        continue
-                    print 'X chooses', best_move[1]
+                        print M_left(game_board)
+                        best_move[1] = M_left(game_board)[0]
+                    
+                    print 'Computer chooses', best_move[1]
                     game_board[best_move[1][0]][best_move[1][1]] = X
         game_fps.tick(FPS)
