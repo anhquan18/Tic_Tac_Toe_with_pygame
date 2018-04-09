@@ -54,8 +54,8 @@ class G_node:
         self.pos = position                       # get the cord of the move
         self.state, self.w_state = self.State()   # evaluate the each move for the next step
         self.n_moves = []                         # list for available moves
-        print self.g_board                        # debug
-        print 'x: {0[0]}, y: {0[1]} depth: {1} player: {2} world_state: {3}\n'.format(self.pos, self.depth, self.player, self.state)
+        #print self.g_board                        # debug
+        #print 'x: {0[0]}, y: {0[1]} depth: {1} player: {2} world_state: {3}\n'.format(self.pos, self.depth, self.player, self.state)
         self.Next_move()                          # go to the next step of the game
     
     def Next_move(self):
@@ -73,22 +73,22 @@ class G_node:
     def State(self):
         if G_Won(self.g_board) == 'won':
             if self.player == -AI:
-                print 'human won\n'
+                #print 'human won\n' #debug
                 return (human_win, 'won') 
             else:
-                print 'computer won\n'
-                print ai_win - self.depth
+                #print 'computer won\n' #debug
+                #print ai_win - self.depth #debug
                 return (ai_win - self.depth, 'won')
         elif G_Won == 'tie':
             return (tie, 'tie')
         if Block(self.g_board, self.pos[0], self.pos[1]):
-            print 'block worked\n'
+            #print 'block worked\n'
             return (block - self.depth, 'block')
         return (0, 'nothing')
 
 
 def Block(board, x_cor, y_cor):
-    print x_cor, y_cor
+    #print x_cor, y_cor #debug
     #Vertical block
     for x in range(board_width):
         if (board[x][0] == board[x][1] == -AI) and (AI == board[x][2]) and (x_cor == x and y_cor == 2):
@@ -301,7 +301,7 @@ if __name__ == '__main__':
                     for x, y in empty_place:
                         game_board[x][y] = AI
                         #print game_board # debug
-                        print 'x: {}, y: {} depth: {} player: {}\n'.format(x, y, game_depth, X)
+                        #print 'x: {}, y: {} depth: {} player: {}\n'.format(x, y, game_depth, X)
                         g_nod = G_node(AI, 0, game_board, [x, y])
                         game_board[x][y] = False
                         x_moves.append(g_nod) 
@@ -317,7 +317,7 @@ if __name__ == '__main__':
                     best_move = best_val
                     # Debug move
                     if best_move[1] == []:
-                        print M_left(game_board)
+                        #print M_left(game_board)
                         best_move[1] = M_left(game_board)[0]
                     
                     print 'Computer chooses', best_move[1]
