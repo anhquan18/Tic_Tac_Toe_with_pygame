@@ -8,7 +8,7 @@ FPS = 60
 win_width = win_height = 400
 box_size = 60
 gap_size = 20
-win_margin = (win_height - (box_size * board_height + gap_size * (board_height - 1))) / 2
+win_margin = int((win_height - (box_size * board_height + gap_size * (board_height - 1))) / 2)
 
 # Value for each move
 human_win = -1000
@@ -151,7 +151,7 @@ def Won_anime(x, y, win_size, won_type):
     x_pix, y_pix = Get_x_y_pixel(x, y)
     
     l_speed = box_size / 10
-    half = box_size / 2
+    half = int(box_size / 2)
     l_width = gap_size / 8
     speed_rate = (box_size + gap_size) / l_speed
     
@@ -225,12 +225,12 @@ def Find_pos(x, y):
 
 
 def Draw_board(board):
-    half = gap_size / 2
+    half = int(gap_size / 2)
     # Draw gap first then draw x o, you don't need to read this mess
     for x_cor in range(1, board_width):
-        pygame.draw.line(game_surf, black, ((win_margin + x_cor * (box_size + gap_size)) - half, win_margin), ((win_margin + x_cor * (box_size + gap_size)) - half, win_height - win_margin), half - 8)
+        pygame.draw.line(game_surf, black, (int((win_margin + x_cor * (box_size + gap_size)) - half), int(win_margin)), (int((win_margin + x_cor * (box_size + gap_size)) - half), int(win_height - win_margin)), int(half - 8))
     for y_cor in range(1, board_height):
-        pygame.draw.line(game_surf, black, (win_margin,(win_margin + y_cor * (box_size + gap_size)) - half), (win_width - win_margin, (win_margin + y_cor * (box_size + gap_size)) - half), half - 8)
+        pygame.draw.line(game_surf, black, (win_margin,int((win_margin + y_cor * (box_size + gap_size)) - half)), (win_width - win_margin, int((win_margin + y_cor * (box_size + gap_size)) - half)), half - 8)
     for x_cor in range(board_width):
         for y_cor in range(board_height):
             if board[x_cor][y_cor] == O:
@@ -256,7 +256,7 @@ def Get_x_y_pixel(x, y): # transform the game coordinate to pixel co...
 
 def Draw_x_o(sign, x, y):
     x_pix, y_pix = Get_x_y_pixel(x,y)
-    half = box_size / 2
+    half = int(box_size / 2)
     
     if sign == X:
         pygame.draw.line(game_surf, black, (x_pix, y_pix),(x_pix + box_size, y_pix + box_size))
@@ -310,7 +310,7 @@ if __name__ == '__main__':
                     for i in range(len(x_moves)):
                         game_node = x_moves[i]
                         normal_move = Min_max(game_node, game_depth)
-                        print 'normal move:{}  best val:{}'.format(normal_move, best_val)
+                        print ('normal move:{}  best val:{}'.format(normal_move, best_val))
                         if (normal_move[0] >= best_val[0]) and (normal_move[1] != []):
                             best_val = normal_move
                     
@@ -320,6 +320,6 @@ if __name__ == '__main__':
                         #print M_left(game_board)
                         best_move[1] = M_left(game_board)[0]
                     
-                    print 'Computer chooses', best_move[1]
+                    print ('Computer chooses', best_move[1])
                     game_board[best_move[1][0]][best_move[1][1]] = X
         game_fps.tick(FPS)
