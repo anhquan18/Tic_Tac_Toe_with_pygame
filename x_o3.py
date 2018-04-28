@@ -150,12 +150,12 @@ def M_left(board):
 def Won_anime(x, y, win_size, won_type):
     x_pix, y_pix = Get_x_y_pixel(x, y)
     
-    l_speed = box_size / 10
+    l_speed = int(box_size / 10)
     half = int(box_size / 2)
-    l_width = gap_size / 8
+    l_width = int(gap_size / 8)
     speed_rate = (box_size + gap_size) / l_speed
     
-    for i in range(1, (win_size * speed_rate) + 1):
+    for i in range(1, int((win_size * speed_rate) + 1)):
         if won_type == 'side':
             pygame.draw.line(game_surf, d_blue, (x_pix - gap_size, y_pix + half), (x_pix + (i * l_speed), y_pix + half), l_width)
         if won_type == 'vertical':
@@ -163,7 +163,7 @@ def Won_anime(x, y, win_size, won_type):
         if won_type == 'diagonal_left':
             pygame.draw.line(game_surf, d_blue, (x_pix + half - (i * l_speed) / 2, y_pix + half - (i * l_speed) / 2), (x_pix + half + (i * l_speed) / 2, y_pix + half + (i * l_speed) / 2), l_width)
         if won_type == 'diagonal_right':
-            pygame.draw.line(game_surf, d_blue, (x_pix + half - (i * l_speed) / 2, y_pix + half + (i * l_speed) / 2), (x_pix + half + (i * l_speed) / 2, y_pix + half - (i * l_speed) / 2), l_width)
+            pygame.draw.line(game_surf, d_blue, (int(x_pix + half - (i * l_speed) / 2), int(y_pix + half + (i * l_speed) / 2)), (int(x_pix + half + (i * l_speed) / 2), int(y_pix + half - (i * l_speed) / 2)), l_width)
         
         pygame.display.update()
         pygame.time.wait(22)    # Wait 22 milisecond for smoother animation 
