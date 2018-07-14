@@ -187,7 +187,7 @@ def G_Won(board, ani = False):
     if board[1][1] != False:
         # LEFT
         if (board[0][0] == board[1][1] == board[2][2]):
-            won_type = ['won','diagonal_lef',(1,1)]
+            won_type = ['won','diagonal_left',(1,1)]
         # RIGHT
         if (board[2][0] == board[1][1] == board[0][2]):
             won_type = ['won','diagonal_right',(1, 1)]
