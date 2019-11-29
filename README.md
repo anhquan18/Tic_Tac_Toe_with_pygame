@@ -1,6 +1,6 @@
 # Simple 3x3 Tic Tac Toe 
-A small project to learn how use simple python and simple game algorithm  
-See [Example](https://youtu.be/4CTznLA2nY0)    
+- A small project to learn how use simple python and simple game algorithm  
+- See [Example](https://youtu.be/4CTznLA2nY0)    
 ![Screenshot - Gameplay1](/Gameplay1.png)
 ![Screenshot - Gameplay2](/Gameplay2.png)
 ![Screenshot - Gameplay3](/Gameplay3.png)
