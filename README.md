@@ -7,5 +7,5 @@
 
 ## Requirement
 - Ubuntu16.04 or Ubuntu18.04
-- python 2.7
+- python 2.7 or later verion
 - pygame 1.9.3
